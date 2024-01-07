@@ -1,0 +1,148 @@
+{% extends 'layouts/base-rtl.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+
+  .welcome-container,
+  .tools-container,
+  .projects {
+    text-align: center;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    width: 100%; /* Faites en sorte que ces conteneurs prennent toute la largeur */
+  }
+
+  .tools-container {
+    padding: 30px;
+  }
+
+  h1 {
+    color: #008CBA;
+  }
+
+  p {
+    color: #333;
+    font-size: 16px;
+  }
+
+  h2 {
+    color: #008CBA;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centrez le contenu horizontalement */
+  }
+
+  img {
+    margin-right: 10px; /* Ajustez la marge si nécessaire */
+    max-width: 400px; /* Augmentez la taille des images */
+    max-height: 400px; /* Augmentez la taille des images */
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .logo {
+    max-width: 60px;
+    max-height: 60px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+
+  tbody tr:hover {
+    background-color: #f9f9f9;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #f5f5f5;
+  }
+</style>
+
+<div class="welcome-container">
+  <h1>مرحبًا بك في مشروع الإنترنت الأشياء</h1>
+  <p>استكشف عالم الإنترنت الأشياء (IoT) مع حلولنا المبتكرة.</p>
+</div>
+
+<div class="projects">
+  <div class="tables">
+      <table>
+          <thead class="DIV">
+              <tr>
+                  <th>الاسم <img id="Capteur-logo" src="{% static 'images/dht11.png' %}" alt="صورة الكابتور"></th>
+                  <th>درجة الحرارة <img id="Temperature-logo" src="{% static 'images/temp1.png' %}" alt="صورة الحرارة"></th>
+                  <th>الرطوبة <img id="Humidity-logo" src="{% static 'images/humidity1.png' %}" alt="صورة الرطوبة"></th>
+                  <th>التاريخ <img id="Time-logo" src="{% static 'images/time.png' %}" alt="صورة الوقت"> </th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td><a href="/billing">DHT 11</a></td>
+                  <td>{{ valeurs.temp }} </td>
+                  <td>{{ valeurs.hum }}</td>
+                  <td>{{ valeurs.date }}</td>
+              </tr>
+              {% for record in data %}
+                  <tr>
+                      <td>{{ record.id }}</td>
+                      <td>{{ record.temp }}</td>
+                      <td>{{ record.hum }}</td>
+                      <td>{{ record.dt }}</td>
+                  </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+  </div>
+</div>
+
+<button id='csv' class="btn btn-primary">تحميل CSV</button>
+
+<div class="tools-container">
+  <h2>الأدوات:</h2>
+  <ul>
+      <li><img src="{% static 'images/esp8266.png' %}" alt="ESP8266">ESP8266</li>
+      <li><img src="{% static 'images/dht11.png' %}" alt="DHT11">جهاز استشعار DHT11</li>
+      <li><img src="{% static 'images/breadboard.png' %}" alt="اللوح ">لوح </li>
+      <!-- Ajoutez plus d'outils selon les besoins -->
+  </ul>
+</div>
+{% include "includes/footer.html" %}
+{% endblock content %}

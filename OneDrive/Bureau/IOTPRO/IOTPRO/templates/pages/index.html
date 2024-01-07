@@ -1,0 +1,537 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+
+  .container {
+    width: 80%;
+    max-width: 1200px;
+  }
+
+  .welcome-container,
+  .tools-container,
+  .projects {
+    text-align: center;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  .tools-container {
+    padding: 30px;
+  }
+
+  .slideshow-container {
+    max-width: 800px;
+    margin: auto;
+    position: relative;
+  }
+
+  .slides {
+    display: none;
+  }
+
+  .slides img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+  }
+
+  .prev, .next {
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -30px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    border-radius: 5px;
+  }
+
+  .prev {
+    left: 0;
+  }
+
+  .next {
+    right: 0;
+  }
+
+  .prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+
+  h1 {
+    color: #008CBA;
+  }
+
+  p {
+    color: #333;
+    font-size: 16px;
+  }
+
+  h2 {
+    color: #008CBA;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  img {
+    margin-right: 10px;
+    max-width: 400px;
+    max-height: 400px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .logo {
+    max-width: 60px;
+    max-height: 60px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+
+  tbody tr:hover {
+    background-color: #f9f9f9;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #f5f5f5;
+  }
+</style>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IoT Project</title>
+  <link rel="stylesheet" href="path/to/your/css/style.css"> <!-- Link to your CSS file -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<div class="welcome-container">
+  <h1>WELCOME TO IOT PROJECT</h1>
+  <p>Explore the world of Internet of Things (IOT) with our innovative solutions.</p>
+
+  <div class="slideshow-container">
+    <div class="slides" id="slide1">
+      <img src="{% static 'images/IoT-devices-1.jpg' %}" alt="Slide 1">
+    </div>
+
+    <div class="slides" id="slide2">
+      <img src="{% static 'images/OIP (6).jpg' %}" alt="Slide 2">
+    </div>
+    <div class="slides" id="slide2">
+      <img src="{% static 'images/R (5).jpg' %}" alt="Slide 2">
+    </div>
+
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+  </div>
+</div>
+
+<script>
+  let slideIndex = 1;
+  showSlides(slideIndex);
+
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
+
+  function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("slides");
+    if (n > slides.length) { slideIndex = 1 }
+    if (n < 1) { slideIndex = slides.length }
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    slides[slideIndex - 1].style.display = "block";
+  }
+
+  // Ajouter l'automatisation du diaporama
+  setInterval(function() {
+    plusSlides(1);
+  }, 5000); // Changez 5000 (ms) pour ajuster l'intervalle
+</script>
+
+
+<div class="projects">
+  <div class="tables">
+      <table>
+          <thead class="DIV">
+              <tr>
+                  <th>Nom <img id="Capteur-logo" src="{% static 'images/dht11.png' %}" alt="Capteur Image"></th>
+                  <th>Temperature <img id="Temperature-logo" src="{% static 'images/temp1.png' %}" alt="Temperature Image"></th>
+                  <th>Humidity <img id="Humidity-logo" src="{% static 'images/humidity1.png' %}" alt="Humidity Image"></th>
+                  <th>Date <img id="Time-logo" src="{% static 'images/time.png' %}" alt="Time Image"> </th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td><a href="/billing">DHT 11</a></td>
+                  <td>{{ valeurs.temp }} </td>
+                  <td>{{ valeurs.hum }}</td>
+                  <td>{{ valeurs.date }}</td>
+              </tr>
+              {% for record in data %}
+                  <tr>
+                      <td>{{ record.id }}</td>
+                      <td>{{ record.temp }}</td>
+                      <td>{{ record.hum }}</td>
+                      <td>{{ record.dt }}</td>
+                  </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+  </div>
+</div>
+
+<button id='csv' class="btn btn-primary">Télecharger csv</button>
+
+<div class="tools-container">
+  <h2>Tools:</h2>
+  <ul>
+      <li><img src="{% static 'images/esp8266.png' %}" alt="ESP8266">ESP8266</li>
+      <li><img src="{% static 'images/dht11.png' %}" alt="DHT11">DHT11 Sensor</li>
+      <li><img src="{% static 'images/breadboard.png' %}" alt="Breadboard">Breadboard</li>
+      <!-- Add more tools as needed -->
+  </ul>
+</div>
+<script src="your-chart-script.js"></script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Données pour le graphique à barres
+    const barChartData = {
+      labels: ["Label 1", "Label 2", "Label 3", "Label 4"],
+      datasets: [
+        {
+          label: "Dataset 1",
+          backgroundColor: "rgba(75, 192, 192, 0.2)",
+          borderColor: "rgba(75, 192, 192, 1)",
+          borderWidth: 1,
+          data: [65, 59, 80, 81],
+        },
+      ],
+    };
+  
+    // Configuration du graphique à barres
+    const ctxBars = document.getElementById("chart-bars").getContext("2d");
+    new Chart(ctxBars, {
+      type: "bar",
+      data: barChartData,
+      options: {
+        responsive: true,
+        scales: {
+          x: {
+            display: true,
+          },
+          y: {
+            display: true,
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+  
+    // Données pour le graphique en ligne
+    const lineChartData = {
+      labels: ["January", "February", "March", "April", "May", "June", "July"],
+      datasets: [
+        {
+          label: "Dataset 1",
+          borderColor: "rgba(75, 192, 192, 1)",
+          borderWidth: 2,
+          fill: false,
+          data: [65, 59, 80, 81, 56, 55, 40],
+        },
+      ],
+    };
+  
+    // Configuration du graphique en ligne
+    const ctxLine = document.getElementById("chart-line").getContext("2d");
+    new Chart(ctxLine, {
+      type: "line",
+      data: lineChartData,
+      options: {
+        responsive: true,
+        scales: {
+          x: {
+            display: true,
+          },
+          y: {
+            display: true,
+            beginAtZero: true,
+          },
+        },
+      },
+    });
+  });
+  </script>
+  
+
+</body>
+</html>
+
+
+  </div>
+
+  <script>
+       
+    var selectEl = $('#mon_select');
+
+    selectEl.change(function() {
+        $('#my-form').submit();
+    });
+
+    var downloadButton = document.getElementById('csv');
+downloadButton.addEventListener('click', function() {
+var xhr = new XMLHttpRequest();
+xhr.open('GET', '/download_csv/', true);
+xhr.responseType = 'blob';
+xhr.onload = function() {
+if (xhr.status === 200) {
+  var url = window.URL.createObjectURL(xhr.response);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'model_values.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+};
+xhr.send();
+});
+
+ 
+</script>
+
+      {% include "includes/footer.html" %}
+
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block scripts %}
+
+  <script src="{% static 'js/plugins/chartjs.min.js' %}"></script>
+  <script>
+    var ctx = document.getElementById("chart-bars").getContext("2d");
+
+    new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: [{
+          label: "Sales",
+          tension: 0.4,
+          borderWidth: 0,
+          borderRadius: 4,
+          borderSkipped: false,
+          backgroundColor: "#fff",
+          data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
+          maxBarThickness: 6
+        }, ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+            },
+            ticks: {
+              suggestedMin: 0,
+              suggestedMax: 500,
+              beginAtZero: true,
+              padding: 15,
+              font: {
+                size: 14,
+                family: "Open Sans",
+                style: 'normal',
+                lineHeight: 2
+              },
+              color: "#fff"
+            },
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false
+            },
+            ticks: {
+              display: false
+            },
+          },
+        },
+      },
+    });
+
+
+    var ctx2 = document.getElementById("chart-line").getContext("2d");
+
+    var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
+    gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+    gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
+
+    var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
+
+    gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
+    gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+    gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
+
+    new Chart(ctx2, {
+      type: "line",
+      data: {
+        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        datasets: [{
+            label: "Mobile apps",
+            tension: 0.4,
+            borderWidth: 0,
+            pointRadius: 0,
+            borderColor: "#cb0c9f",
+            borderWidth: 3,
+            backgroundColor: gradientStroke1,
+            fill: true,
+            data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+            maxBarThickness: 6
+
+          },
+          {
+            label: "Websites",
+            tension: 0.4,
+            borderWidth: 0,
+            pointRadius: 0,
+            borderColor: "#575f9a",
+            borderWidth: 3,
+            backgroundColor: gradientStroke2,
+            fill: true,
+            data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
+            maxBarThickness: 6
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: true,
+              drawOnChartArea: true,
+              drawTicks: false,
+              borderDash: [5, 5]
+            },
+            ticks: {
+              display: true,
+              padding: 10,
+              color: '#b2b9bf',
+              font: {
+                size: 11,
+                family: "Open Sans",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+              borderDash: [5, 5]
+            },
+            ticks: {
+              display: true,
+              color: '#b2b9bf',
+              padding: 20,
+              font: {
+                size: 11,
+                family: "Open Sans",
+                style: 'normal',
+                lineHeight: 2
+              },
+            }
+          },
+        },
+      },
+    });
+  </script>
+
+{% endblock scripts %}

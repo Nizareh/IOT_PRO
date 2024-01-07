@@ -1,0 +1,71 @@
+{% load i18n static admin_soft %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+{% get_direction as direction %}
+
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>
+        IOT Dashboard - {% block title %}{% endblock %}
+    </title>
+
+    <!-- Favicon -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static 'img/apple-icon.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <!-- Nucleo Icons -->
+    <link href="{% static 'css/nucleo-icons.css' %}" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <!-- CSS Files -->
+    <link id="pagestyle" href="{% static 'css/soft-ui-dashboard.css' %}" rel="stylesheet" />
+    <link id="pagestyle_dark" href="{% static 'css/dark-theme-core.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyARuZ+PDpUDFhXdq2Fh2j5q412D2xIf4" crossorigin="anonymous">
+
+    {% block extrahead %}{% endblock extrahead %}
+    {% block extrastyle %}{% endblock extrastyle %}
+
+</head>
+
+<body class="g-sidenav-show bg-gray-100">
+
+    {% include "includes/sidebar.html" %}
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        {% include "includes/navigation.html" %} 
+        <div class="container-fluid py-4">
+            <div class="content-header">
+                <h2>{% block content_title %}{% endblock %}</h2>
+                {% block content_subtitle %}{% endblock %}
+            </div>
+            <div class="content-body">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/1.5.2/perfect-scrollbar.min.js"></script>
+
+    <!-- Soft UI Dashboard Scripts -->
+    <script src="{% static 'path/to/soft-ui-dashboard.min.js' %}"></script>
+    <script src="{% static 'js/soft-ui-dashboard.min.js' %}"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+
+    <!-- Add these lines to your base.html or template that includes the header -->
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-Xm3FsLlMy1v3vfrTMcdAzlX0hScNMj3A1LN0bq04N3j5E5RN1ZgM2i8aheFXCh2g" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyARuZ+PDpUDFhXdq2Fh2j5q412D2xIf4" crossorigin="anonymous"></script>
+
+
+    {% block extrascript %}{% endblock extrascript %}
+
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+<style>/* Add the following styles to your existing style.css file */
+
+    .container1 {
+        margin: 80px auto;
+        padding: 0 20px 20px 20px;
+    }
+    
+    h1 {
+        margin-bottom: 20px;
+        color: #3498db; /* Header color - Blue */
+        text-align: center;
+    }
+    
+    form {
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 8px;
+        color: #3498db; /* Label color - Blue */
+    }
+    
+    input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 16px;
+        border: 1px solid #3498db; /* Input border color - Blue */
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+    
+    button#new {
+        background-color: #3498db; /* Button background color - Blue */
+        border-color: #2980b9; /* Darker blue for border */
+        border-radius: 5px;
+        padding: 10px;
+        color: white;
+        cursor: pointer;
+    }
+    
+    button#new:hover {
+        background-color: #2980b9; /* Darker blue on hover */
+    }
+    </style>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+<body>
+    <div class="container1">
+        <h1>Add Member</h1>
+        <form action="{% url 'addrec' %}" method="post">
+            {% csrf_token %}
+            <label for="">First Name</label><br><br>
+            <input type="text" name="first"><br><br>
+            <label for="">Last Name</label><br><br>
+            <input type="text" name="last"><br><br>
+            <label for="">Country</label><br><br>
+            <input type="text" name="country"><br><br>
+            <button type="submit" id="new">Submit</button>
+        </form>
+    </div>
+</body>
+
+</html>
+{% endblock %}
